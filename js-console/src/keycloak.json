@@ -1,0 +1,5 @@
+{
+  "realm" : "quarkus",
+  "auth-server-url" : "https://keycloak.rhbk.apps.green.demoshift.com",
+  "resource" : "js-console"
+}
