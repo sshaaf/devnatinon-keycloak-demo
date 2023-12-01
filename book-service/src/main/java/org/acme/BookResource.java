@@ -21,8 +21,8 @@ public class BookResource {
 
     private static final Logger logger = Logger.getLogger(BookResource.class);
     @GET
-//    @RolesAllowed("user")
-//    @NoCache
+    @RolesAllowed("user")
+    @NoCache
     @Operation(summary = "Get all books")
     public Response getAll() {
         return Response.ok(Book.listAll()).build();
@@ -30,9 +30,9 @@ public class BookResource {
     }
 
     @GET
+    @Path("/{isbn}")
     @RolesAllowed("user")
     @NoCache
-    @Path("/{isbn}")
     @Operation(summary = "Get one book by searching {isbn}")
     public Response getOne(@PathParam("isbn") String isbn) {
         Book entity = Book.findById(isbn);
@@ -61,8 +61,9 @@ public class BookResource {
 
     @PUT
     @Path("/{isbn}")
-    @RolesAllowed("user")
+    @RolesAllowed("confidential")
     @NoCache
+
     @Operation(summary = "Update the entire book taking {isbn} as a parameter")
     @Transactional
     public Response update(@Valid Book book, @PathParam("isbn") String isbn) {
@@ -90,6 +91,7 @@ public class BookResource {
     @Path("/{isbn}")
     @RolesAllowed("user")
     @NoCache
+
     @Operation(summary = "Delete a book based on its {isbn}")
     @Transactional
     public Response deleteOne(@PathParam("isbn") String isbn) {
